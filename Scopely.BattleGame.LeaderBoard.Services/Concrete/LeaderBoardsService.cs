@@ -11,9 +11,9 @@ namespace Scopely.BattleGame.LeaderBoards.Services
             _leaderBoardsRepository = leaderBoardsRepository;
         }
 
-        public async Task AddToLeaderBoard(string leaderBoardName, string playerId, long score)
+        public async Task AddToLeaderBoard(string leaderBoardName, string playerName, long score)
         {
-            await _leaderBoardsRepository.AddToLeaderBoard(leaderBoardName, playerId, score);
+            await _leaderBoardsRepository.AddToLeaderBoard(leaderBoardName, playerName, score);
         }
 
         public Task<IEnumerable<LeaderBoard>> GetLeaderBoard(string leaderBoardName)

@@ -16,9 +16,9 @@ namespace Scopely.BattleGame.LeaderBoards.Repository
             return await _repository.GetAllFromSortedSet(leaderBoardName);
         }
 
-        public async Task AddToLeaderBoard(string leaderBoardName, string playerId, long score)
+        public async Task AddToLeaderBoard(string leaderBoardName, string playerName, long score)
         {
-            await _repository.AddToSortedSet(leaderBoardName, playerId, score);
+            await _repository.AddToSortedSet(leaderBoardName, playerName, score);
         }
     }
 }
