@@ -7,7 +7,7 @@
         /// </summary>
         /// <param name="leaderBoardName">The set name</param>
         /// <returns>All the sorted set entities</returns>
-        Task<IEnumerable<LeaderBoard>> GetLeaderBoard(string leaderBoardName);
+        Task<LeaderBoard> GetLeaderBoard(string leaderBoardName);
 
         /// <summary>
         /// Adds the entity to the desired set

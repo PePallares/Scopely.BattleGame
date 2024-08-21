@@ -62,28 +62,10 @@ namespace Scopely.BattleGame.Repositories
             await _database.SetAddAsync(setName, json);
         }
 
-        public async Task<IEnumerable<T>> GetAllFromSortedSet(string setName)
+        public async Task<SortedSetEntry[]> GetAllFromSortedSet(string setName)
         {
-            var sortedValues = await _database.SortedSetRangeByRankWithScoresAsync(setName);
-            var values = new List<T>();
-
-            foreach (var value in sortedValues)
-            {
-                if (value.Element.IsNull) 
-                {
-                    continue;
-                }
-
-                var entity = JsonConvert.DeserializeObject<T>(value.Element);
-
-                if (entity is not null) 
-                {
-                    values.Add(entity);
-                }
-            }
-
-            return values;
-
+            var sortedValues = await _database.SortedSetRangeByRankWithScoresAsync(setName, 0, -1, Order.Descending);
+            return sortedValues;
         }
 
         public Task AddToSortedSet(string setName, string playerId, long score)

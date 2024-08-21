@@ -1,19 +1,46 @@
-﻿using Scopely.BattleGame.Repositories.Interfaces;
+﻿using Microsoft.Extensions.Options;
+using Scopely.BattleGame.Redis;
+using Scopely.BattleGame.Repositories.Interfaces;
 
 namespace Scopely.BattleGame.LeaderBoards.Repository
 {
     public class LeaderBoardsRepository : ILeaderBoardsRepository
     {
         private readonly IRedisRepository<LeaderBoard> _repository;
+        private readonly RedisSettings _redisSettings;
 
-        public LeaderBoardsRepository(IRedisRepository<LeaderBoard> repository)
+        public LeaderBoardsRepository(IRedisRepository<LeaderBoard> repository, IOptions<RedisSettings> redisSettings)
         {
             _repository = repository;
+            _redisSettings = redisSettings.Value;
         }
 
-        public async Task<IEnumerable<LeaderBoard>> GetLeaderBoard(string leaderBoardName) 
+        public async Task<LeaderBoard> GetLeaderBoard(string leaderBoardName) 
         {
-            return await _repository.GetAllFromSortedSet(leaderBoardName);
+            var leaderBoardEntries = await _repository.GetAllFromSortedSet(leaderBoardName);
+            var leaderBoard = new LeaderBoard()
+            {
+                Name = _redisSettings.BattleLeaderBoardName
+            };
+
+            var leaderBoardRanking = new List<LeaderBoardPlayer>();
+            var rank = 1;
+
+            foreach (var leaderBoardEntry in leaderBoardEntries) 
+            {
+                leaderBoardRanking.Add(new LeaderBoardPlayer() 
+                {
+                    playerName = leaderBoardEntry.Element.ToString(),
+                    rank = rank,
+                    score = Convert.ToInt64(leaderBoardEntry.Score),
+                });
+
+                rank++;
+            }
+
+            leaderBoard.LeaderBoardRanking = leaderBoardRanking;
+
+            return leaderBoard;
         }
 
         public async Task AddToLeaderBoard(string leaderBoardName, string playerName, long score)

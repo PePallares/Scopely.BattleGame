@@ -1,4 +1,6 @@
-﻿namespace Scopely.BattleGame.Repositories.Interfaces
+﻿using StackExchange.Redis;
+
+namespace Scopely.BattleGame.Repositories.Interfaces
 {
     public  interface IRedisRepository<T> : IRepository<T> where T : class
     {
@@ -21,7 +23,7 @@
         /// </summary>
         /// <param name="setName">The set name</param>
         /// <returns>All the sorted set entities</returns>
-        Task<IEnumerable<T>> GetAllFromSortedSet(string setName);
+        Task<SortedSetEntry[]> GetAllFromSortedSet(string setName);
 
         /// <summary>
         /// Adds the entity to the desired set
