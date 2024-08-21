@@ -68,9 +68,19 @@ namespace Scopely.BattleGame.Repositories
             return sortedValues;
         }
 
-        public Task AddToSortedSet(string setName, string playerId, long score)
+        public async Task AddToSortedSet(string setName, string playerId, long score)
         {
-            throw new NotImplementedException();
+            await _database.SortedSetAddAsync(setName, playerId, score);
+        }
+
+        public async Task SortedSetIncrement(string setName, string playerId, long score)
+        {
+            await _database.SortedSetIncrementAsync(setName, playerId, score);
+        }
+
+        public async Task<double?> GetPlayerScore(string setName, string playerId)
+        {
+            return await _database.SortedSetScoreAsync(setName, playerId);
         }
     }
 }

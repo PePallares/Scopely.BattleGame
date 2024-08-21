@@ -58,7 +58,7 @@ namespace Scopely.BattleGame.Battles.Services
             {
                 var attackerAttack = CalculateAttack(attackerRemainingHP, battle.attacker.BattleAttributes);
                 var attackerDamage = CalculateDamage(attackerAttack, battle.defender.BattleAttributes);
-                battle.defender.BattleAttributes.HitPoints -= attackerDamage;
+                defenderRemainginHP -= attackerDamage;
 
                 _logger.LogInformation($"Attacker {battle.attacker.Id} has done {attackerDamage} to defender {battle.defender.Id}");
 
@@ -69,12 +69,12 @@ namespace Scopely.BattleGame.Battles.Services
 
                 var defenderAttack = CalculateAttack(defenderRemainginHP, battle.defender.BattleAttributes);
                 var defenderDamage = CalculateDamage(defenderAttack, battle.attacker.BattleAttributes);
-                battle.attacker.BattleAttributes.HitPoints -= defenderDamage;
+                attackerRemainingHP -= defenderDamage;
 
                 _logger.LogInformation($"Defender {battle.defender.Id} has done {defenderDamage} to attacker {battle.attacker.Id}");
             }
 
-            await GiveRewards(battle);
+            await GiveRewards(battle, attackerRemainingHP, defenderRemainginHP);
         }
 
         private bool CheckRemainingHitPoints(int attackerRemainingHP, int defenderRemainginHP) 
@@ -99,29 +99,32 @@ namespace Scopely.BattleGame.Battles.Services
             return attackerAttack;
         }
 
-        private async Task GiveRewards(Battle battle) 
+        private async Task GiveRewards(Battle battle,int attackerRemainingHP, int defenderRemainginHP) 
         {
             var stealPercentatge = _random.Next(10, 21);
-            var goldStealPercentatge = _random.Next(0, stealPercentatge);
-            var silverStealPercentatge = stealPercentatge - goldStealPercentatge;
+            decimal goldStealPercentatge = _random.Next(0, stealPercentatge);
+            decimal silverStealPercentatge = stealPercentatge - goldStealPercentatge;
 
-            var winner = battle.attacker.BattleAttributes.HitPoints > 0 ? battle.attacker : battle.defender;
-            var loser = battle.attacker.BattleAttributes.HitPoints <= 0 ? battle.attacker : battle.defender;
+            var winner = attackerRemainingHP > 0 ? battle.attacker : battle.defender;
+            var loser = defenderRemainginHP <= 0 ? battle.attacker : battle.defender;
 
-            var stolenGold = loser.Wallet.Gold * goldStealPercentatge;
-            var stolenSilver = loser.Wallet.Silver * silverStealPercentatge;
+            var stolenGold = Convert.ToInt32(loser.Wallet.Gold * (goldStealPercentatge/100));
+            var stolenSilver = Convert.ToInt32(loser.Wallet.Silver * (silverStealPercentatge/100));
 
             winner.Wallet.Gold += stolenGold;
             winner.Wallet.Silver += stolenSilver;
 
             await _playersService.UpdatePlayer(winner);
-            await _leaderBoardsService.AddToLeaderBoard(_redisSettings.BattleLeaderBoardName, winner.Name, stolenGold + stolenSilver);
+            await _leaderBoardsService.SortedSetIncrement(_redisSettings.BattleLeaderBoardName, winner.Name, stolenGold + stolenSilver);
 
             loser.Wallet.Gold -= stolenGold;
             loser.Wallet.Silver -= stolenSilver;
 
             await _playersService.UpdatePlayer(loser);
-            await _leaderBoardsService.AddToLeaderBoard(_redisSettings.BattleLeaderBoardName, loser.Name, - stolenGold - stolenSilver);
+            var loserScore = await _leaderBoardsService.GetUserScore(_redisSettings.BattleLeaderBoardName, loser.Name);
+            var pointsToLose = Math.Min(loserScore, stolenGold + stolenSilver);
+
+            await _leaderBoardsService.SortedSetIncrement(_redisSettings.BattleLeaderBoardName, loser.Name, -pointsToLose);
         }
     }
 }

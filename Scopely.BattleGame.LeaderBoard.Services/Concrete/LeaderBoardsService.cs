@@ -20,5 +20,15 @@ namespace Scopely.BattleGame.LeaderBoards.Services
         {
             return await _leaderBoardsRepository.GetLeaderBoard(leaderBoardName);
         }
+
+        public async Task<long> GetUserScore(string leaderBoardName, string playerName)
+        {
+            return await _leaderBoardsRepository.GetUserScore(leaderBoardName, playerName);
+        }
+
+        public async Task SortedSetIncrement(string setName, string playerId, long score)
+        {
+            await _leaderBoardsRepository.SortedSetIncrement(setName, playerId, score);
+        }
     }
 }

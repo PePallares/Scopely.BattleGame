@@ -7,7 +7,7 @@ namespace Scopely.BattleGame.Players.Services
         private IPlayerRepository _playersRepository;
 
         private const int _maxNameLength = 20;
-        private const int _maxdescriptionLength = 1000;
+        private const int _maxDescriptionLength = 1000;
 
         public PlayersService(IPlayerRepository playerRepository) 
         {
@@ -53,7 +53,7 @@ namespace Scopely.BattleGame.Players.Services
             }
             
             if (String.IsNullOrEmpty(newPlayer.Description) ||
-                newPlayer.Description.Length > _maxdescriptionLength) 
+                newPlayer.Description.Length > _maxDescriptionLength) 
             {
                 return false;
             }

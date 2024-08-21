@@ -17,11 +17,11 @@ namespace Scopely.BattleGame.Api.Controllers
         }
 
         [HttpPost(Name = "SubmitBattle")]
-        public IActionResult SubmitBattle(string attackerId, string defenderId)
+        public async Task<IActionResult> SubmitBattle(string attackerId, string defenderId)
         {
             try
             {
-                _battlesService.SubmitBattle(attackerId, defenderId);
+                await _battlesService.SubmitBattle(attackerId, defenderId);
                 return Ok();
             }
             catch (Exception ex)

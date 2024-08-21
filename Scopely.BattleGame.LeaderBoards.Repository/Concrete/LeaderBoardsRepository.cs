@@ -47,5 +47,16 @@ namespace Scopely.BattleGame.LeaderBoards.Repository
         {
             await _repository.AddToSortedSet(leaderBoardName, playerName, score);
         }
+
+        public async Task<long> GetUserScore(string leaderBoardName, string playerName) 
+        {
+            var score = await _repository.GetPlayerScore(leaderBoardName, playerName);
+            return score is null ? 0 : Convert.ToInt64(score);
+        }
+
+        public async Task SortedSetIncrement(string setName, string playerId, long score)
+        {
+            await _repository.SortedSetIncrement(setName, playerId, score);
+        }
     }
 }
