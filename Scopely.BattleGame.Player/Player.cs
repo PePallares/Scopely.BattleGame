@@ -2,7 +2,7 @@
 {
     public class Player
     {
-        public required string Id { get; set; }
+        public string Id { get; set; }
         public required string Name { get; set; }
         public string Description { get; set; }
         public PlayerWallet Wallet { get; set; }

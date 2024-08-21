@@ -3,29 +3,32 @@
     public class PlayerWallet
     {
         private readonly int _maxWalletValue = 1000000000;
+
+        private int _gold;
         public int Gold 
         {
             get
             {
-                return Gold;
+                return _gold;
             }
 
             set
             {
-                Gold = Math.Min(value, _maxWalletValue);
+                _gold = Math.Min(value, _maxWalletValue);
             }
         }
 
+        private int _silver;
         public int Silver
         {
             get
             {
-                return Silver;
+                return _silver;
             }
 
             set
             {
-                Silver = Math.Min(value, _maxWalletValue);
+                _silver = Math.Min(value, _maxWalletValue);
             }
         }
 

@@ -18,11 +18,11 @@ namespace Scopely.BattleGame.Api.Controllers
         }
 
         [HttpPost(Name = "CreatePlayer")]
-        public async Task<IActionResult> CreatePlayer(Player player)
+        public async Task<IActionResult> CreatePlayer(NewPlayerRequest newPlayer)
         {
             try
             {
-                await _playerService.CreatePlayer(player);
+                await _playerService.CreatePlayer(newPlayer);
                 return Ok();
             }
             catch (Exception ex)

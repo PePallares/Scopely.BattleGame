@@ -19,10 +19,16 @@ namespace Scopely.BattleGame.Players.Services
             return await _playersRepository.GetPlayer(playerId);
         }
 
-        public async Task CreatePlayer(Player player)
+        public async Task CreatePlayer(NewPlayerRequest newPlayer)
         {
-            if (ValidatePlayerValues(player))
+            if (ValidatePlayerValues(newPlayer))
             {
+                var player = new Player()
+                {
+                    Name = newPlayer.Name,
+                    Description = newPlayer.Description,
+                };
+
                 await _playersRepository.AddPlayer(player);
             }
         }
@@ -38,16 +44,16 @@ namespace Scopely.BattleGame.Players.Services
             await _playersRepository.RemovePlayer(playerId);
         }
 
-        private bool ValidatePlayerValues(Player player)
+        private bool ValidatePlayerValues(NewPlayerRequest newPlayer)
         {
-            if (String.IsNullOrEmpty(player.Name) || 
-                player.Name.Length > _maxNameLength)
+            if (String.IsNullOrEmpty(newPlayer.Name) ||
+                newPlayer.Name.Length > _maxNameLength)
             {
                 return false;
             }
             
-            if (String.IsNullOrEmpty(player.Description) || 
-                player.Description.Length > _maxdescriptionLength) 
+            if (String.IsNullOrEmpty(newPlayer.Description) ||
+                newPlayer.Description.Length > _maxdescriptionLength) 
             {
                 return false;
             }

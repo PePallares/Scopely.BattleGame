@@ -13,7 +13,7 @@
         /// Creates a new player to the DDBB
         /// </summary>
         /// <param name="player">The player to add</param>
-        Task CreatePlayer(Player player);
+        Task CreatePlayer(NewPlayerRequest newPlayer);
 
         /// <summary>
         /// Updates an existing player
