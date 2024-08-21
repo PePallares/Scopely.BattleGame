@@ -1,0 +1,6 @@
+@Scopely.BattleGame_HostAddress = http://localhost:5137
+
+GET {{Scopely.BattleGame_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Scopely.BattleGame.Battle\Scopely.BattleGame.Battles.csproj" />
+    <ProjectReference Include="..\Scopely.BattleGame.LeaderBoard.Services\Scopely.BattleGame.LeaderBoards.Services.csproj" />
+    <ProjectReference Include="..\Scopely.BattleGame.Player.Services\Scopely.BattleGame.Players.Services.csproj" />
+    <ProjectReference Include="..\Scopely.BattleGame.Player\Scopely.BattleGame.Players.csproj" />
+  </ItemGroup>
+
+</Project>

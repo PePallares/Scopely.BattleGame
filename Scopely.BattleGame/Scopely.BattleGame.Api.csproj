@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Scopely.BattleGame.Battle.Services\Scopely.BattleGame.Battle.Services.csproj" />
+    <ProjectReference Include="..\Scopely.BattleGame.LeaderBoard.Services\Scopely.BattleGame.LeaderBoards.Services.csproj" />
+    <ProjectReference Include="..\Scopely.BattleGame.Player.Services\Scopely.BattleGame.Players.Services.csproj" />
+    <ProjectReference Include="..\Scopely.BattleGame.RedisSettings\Scopely.BattleGame.Redis.csproj" />
+  </ItemGroup>
+
+</Project>
