@@ -8,11 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Scopely.BattleGame.Battle.Services\Scopely.BattleGame.Battle.Services.csproj" />
+    <ProjectReference Include="..\Scopely.BattleGame.JWT.Services\Scopely.BattleGame.JWT.Services.csproj" />
     <ProjectReference Include="..\Scopely.BattleGame.LeaderBoard.Services\Scopely.BattleGame.LeaderBoards.Services.csproj" />
     <ProjectReference Include="..\Scopely.BattleGame.Player.Services\Scopely.BattleGame.Players.Services.csproj" />
     <ProjectReference Include="..\Scopely.BattleGame.RedisSettings\Scopely.BattleGame.Redis.csproj" />

@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Scopely.BattleGame.Players;
 using Scopely.BattleGame.Players.Services;
 
 namespace Scopely.BattleGame.Api.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class PlayersController : ControllerBase

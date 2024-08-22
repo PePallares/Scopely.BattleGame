@@ -29,9 +29,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scopely.BattleGame.Players.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scopely.BattleGame.Players.Repository", "namespace Scopely.BattleGame.Player.Repository\Scopely.BattleGame.Players.Repository.csproj", "{4B8AB49D-F1ED-4137-843A-A49C0B2CD41F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scopely.BattleGame.LeaderBoards.Repository", "Scopely.BattleGame.LeaderBoards.Repository\Scopely.BattleGame.LeaderBoards.Repository.csproj", "{CE235F63-FB6D-4ED0-8091-357520E531C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scopely.BattleGame.LeaderBoards.Repository", "Scopely.BattleGame.LeaderBoards.Repository\Scopely.BattleGame.LeaderBoards.Repository.csproj", "{CE235F63-FB6D-4ED0-8091-357520E531C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scopely.BattleGame.Redis", "Scopely.BattleGame.RedisSettings\Scopely.BattleGame.Redis.csproj", "{6D7438E3-73C8-4F43-A3E0-9E01DC8F3CF3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Scopely.BattleGame.Redis", "Scopely.BattleGame.RedisSettings\Scopely.BattleGame.Redis.csproj", "{6D7438E3-73C8-4F43-A3E0-9E01DC8F3CF3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scopely.BattleGame.JWT", "Scopely.BattleGame.JWT\Scopely.BattleGame.JWT.csproj", "{E8177462-5F1E-4DFD-B532-E53EB38AD452}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scopely.BattleGame.JWT.Services", "Scopely.BattleGame.JWT.Services\Scopely.BattleGame.JWT.Services.csproj", "{048B3C98-EC15-42A6-AD82-C0DC12D90F97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +87,14 @@ Global
 		{6D7438E3-73C8-4F43-A3E0-9E01DC8F3CF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D7438E3-73C8-4F43-A3E0-9E01DC8F3CF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D7438E3-73C8-4F43-A3E0-9E01DC8F3CF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E8177462-5F1E-4DFD-B532-E53EB38AD452}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E8177462-5F1E-4DFD-B532-E53EB38AD452}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E8177462-5F1E-4DFD-B532-E53EB38AD452}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E8177462-5F1E-4DFD-B532-E53EB38AD452}.Release|Any CPU.Build.0 = Release|Any CPU
+		{048B3C98-EC15-42A6-AD82-C0DC12D90F97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{048B3C98-EC15-42A6-AD82-C0DC12D90F97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{048B3C98-EC15-42A6-AD82-C0DC12D90F97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{048B3C98-EC15-42A6-AD82-C0DC12D90F97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +111,8 @@ Global
 		{4B8AB49D-F1ED-4137-843A-A49C0B2CD41F} = {275BE160-587F-468E-928D-03FD13FB7D22}
 		{CE235F63-FB6D-4ED0-8091-357520E531C3} = {275BE160-587F-468E-928D-03FD13FB7D22}
 		{6D7438E3-73C8-4F43-A3E0-9E01DC8F3CF3} = {E0C99A97-25C0-48DF-951E-51832DC5B547}
+		{E8177462-5F1E-4DFD-B532-E53EB38AD452} = {E0C99A97-25C0-48DF-951E-51832DC5B547}
+		{048B3C98-EC15-42A6-AD82-C0DC12D90F97} = {6503450D-AAB6-49E7-8462-0A1B2AC6DF35}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B7DFCC60-BC87-419E-8409-632EF2697B48}
